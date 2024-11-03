@@ -1,0 +1,24 @@
+<%- include('partials/nav') -%>
+<div class="flex items-center justify-center flex-grow w-full">
+    <div class="h-[25rem] w-[20%] bg-[#111111] flex items-center justify-center gap-10 flex-col font-poppins rounded-lg">
+        <p class="text-3xl text-white">Sign Up</p>
+
+        <form action="/signup" method="post" class="flex flex-col items-center w-full justify-center gap-5">
+            <div class="flex flex-col text-white items-start justify-center w-[90%] gap-1">
+                <p class="text-xs">E-mail</p>
+                <input required name="email" type="email" class="h-12 w-[100%] rounded-lg bg-black text-white pl-2"> 
+            </div>
+            <div class="flex flex-col text-white items-start justify-center w-[90%] gap-1">
+                <p class="text-xs">Password</p>
+                <input required name="password" type="password" class="h-12 w-[100%] rounded-lg bg-black text-white pl-2"> 
+            </div>
+            <div class="flex flex-col items-center justify-center w-full gap-2">
+                <button class="h-12 w-[90%] rounded-xl bg-white" type="submit">Submit</button>
+                <p class="text-xs text-white">Already have an account? <a class="text-blue-500" href="/login">Login Here</a></p>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<%- include('partials/foot') -%>

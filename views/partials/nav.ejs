@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +17,28 @@
             <div class="w-[90%] h-10 flex items-center justify-between">
                 <p class="font-poppins text-lg text-white">Library</p>
                 <div class="flex flex-row items-center justify-center gap-5 font-poppins text-white">
-                    <a href="#">Sign Up</a>
-                    <a class="py-2 px-7 bg-white text-black rounded-lg" href="#">Login</a>
+                    <% if (user) { %>
+                        <% if (user.admin) { %>
+                            <a href="/admin">Admin</a>
+                        <% } %>
+                        <a class="py-2 px-7 bg-white text-black rounded-lg" href="/logout">Logout</a>
+                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button" class="flex flex-row items-center justify-center gap-2 hover:bg-[#292929] transition-all duration-75 py-2 px-2 rounded-lg"><%= user.email.slice(0, 9) %>... <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                    <% } else { %>
+                        <a href="#">Sign Up</a>
+                        <a class="py-2 px-7 bg-white text-black rounded-lg" href="/login">Login</a>
+                    <% } %>
+
+                        
+                    <div id="dropdown" class="z-10 hidden bg-[#111111] rounded-lg shadow w-44 border-2 border-[#242424]">
+                        <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdownDefaultButton">
+                        <li>
+                            <a href="/sessions" class="block px-4 py-2 hover:bg-gray-600 dark:hover:text-white">My Sessions</a>
+                        </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

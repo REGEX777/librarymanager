@@ -1,0 +1,24 @@
+<%- include('partials/nav') -%>
+<div class="flex items-start justify-center flex-grow w-full text-white py-5">
+    <div class="flex flex-col items-center justify-center w-[70%] gap-10">
+        <% sessions.forEach(session => { %>
+            <div class="w-full flex items-center justify-center bg-[#111111] rounded-lg py-5">
+                <div class="w-[90%] flex items-center justify-between">
+                    <div class="flex flex-col items-start justify-center">
+                        <p>Device: <%= session.deviceInfo %></p>
+                        <p>IP: <%= session.ipAddress %></p>
+                        <p>Logged in at: <%= session.loggedInAt.toLocaleString() %></p>
+                    </div>
+                    <div>
+                        <form action="/sessions/logout" method="POST">
+                            <input type="hidden" name="sessionId" value="<%= session._id %>">
+                            <button class="py-2 px-2 bg-red-500 rounded-lg" type="submit">Log out</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <% }) %>
+    </div>
+</div>
+<%- include('partials/foot') -%>
