@@ -21,35 +21,3 @@
     </div>
 </div>
 <%- include('partials/foot') -%>
-
-<script>
-    document.querySelectorAll('.logout-form').forEach(form => {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); 
-
-            const sessionId = this.querySelector('input[name="sessionId"]').value;
-
-            // send an ajax request to log out the session
-            fetch('/sessions/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ sessionId: sessionId }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    this.closest('.w-full').remove();  
-
-                    if (data.redirect) {
-                        window.location.href = data.redirect;
-                    }
-                } else {
-                    alert(data.message || 'Error logging out');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    });
-</script>
