@@ -21,18 +21,24 @@ router.get('/', isLoggedIn, async (req, res) => {
 router.post('/logout', isLoggedIn, async (req, res) => {
     const { sessionId } = req.body;
 
-    await Session.findByIdAndUpdate(sessionId, { isActive: false });
+    const session = await Session.findById(sessionId);
+    if (session) {
+        session.isActive = false;
+        await session.save();
+    }
+
+    // check for active sessions after logout
     const activeSessions = await Session.find({ userId: req.user._id, isActive: true });
 
     if (activeSessions.length === 0) {
-        req.logout(err => { 
+        req.logout(err => {
             if (err) {
                 console.error('Logout error:', err);
             }
-            return res.redirect('/login');
+            return res.json({ success: true });
         });
     } else {
-        res.redirect('/sessions');
+        return res.json({ success: true });
     }
 });
 export default router;

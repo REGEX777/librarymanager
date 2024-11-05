@@ -3,11 +3,19 @@
     <div class="min-h-[25rem] w-[95%] 450peeeexxx:w-[80%] mid-small2:w-[60%] 700px:w-[40%] 4k-lowest:w-[20%] bg-[#111111] flex items-center justify-center gap-10 flex-col font-poppins rounded-lg">
 
         <% if (errorMessages && errorMessages.length > 0) { %>
-        <div class="h-[4rem] bg-red-500 w-[90%] rounded-lg flex items-center justify-center text-white">
-            <% errorMessages.forEach(message => { %>
-            <p><i class="fa-solid fa-triangle-exclamation pr-2"></i> <%=message %></p>
-            <% }); %>
-        </div>
+            <div class="h-[4rem] bg-red-500 min-w-[40%] px-5 rounded-lg flex items-center justify-center text-white">
+                <% errorMessages.forEach(message => { %>
+                    <p><i class="fa-solid fa-triangle-exclamation pr-2"></i> <%= message %></p>
+                <% }); %>
+            </div>
+        <% } %>
+        
+        <% if (successMessages && successMessages.length > 0) { %>
+            <div class="h-[4rem] bg-green-500 min-w-[40%] px-5 rounded-lg flex items-center justify-center text-white">
+                <% successMessages.forEach(message => { %>
+                    <p><i class="fa-solid fa-check pr-2"></i> <%= message %></p>
+                <% }); %>
+            </div>
         <% } %>
         <p class="text-3xl text-white">Log In</p>
 

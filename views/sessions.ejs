@@ -1,6 +1,6 @@
 <%- include('partials/nav') -%>
 <div class="flex items-start justify-center flex-grow w-full text-white py-5">
-    <div class="flex flex-col items-center justify-center w-[95%] mid-small2:w-[80%]  gap-10">
+    <div class="flex flex-col items-center justify-center w-[95%] mid-small2:w-[80%] gap-10">
         <% sessions.forEach(session => { %>
             <div class="w-full flex items-center justify-center bg-[#111111] rounded-lg py-5">
                 <div class="w-[90%] flex flex-col 400px:flex-row items-center justify-between gap-5">
@@ -10,15 +10,42 @@
                         <p>Logged in at: <%= session.loggedInAt.toLocaleString() %></p>
                     </div>
                     <div>
-                        <form action="/sessions/logout" method="POST">
+                        <form class="logout-form" action="/sessions/logout" method="POST">
                             <input type="hidden" name="sessionId" value="<%= session._id %>">
                             <button class="py-2 px-2 bg-red-500 rounded-lg" type="submit">Log out</button>
                         </form>
                     </div>
                 </div>
             </div>
-
         <% }) %>
     </div>
 </div>
 <%- include('partials/foot') -%>
+
+<script>
+    document.querySelectorAll('.logout-form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const sessionId = this.querySelector('input[name="sessionId"]').value;
+
+            // send an ajax request to log out the session
+            fetch('/sessions/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ sessionId: sessionId }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.closest('.w-full').remove();
+                } else {
+                    alert('Error logging out');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+</script>

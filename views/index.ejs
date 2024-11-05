@@ -4,7 +4,7 @@
     <div class="w-[95%] mid-small2:w-[80%] 4k-lowminus2:w-[70%] flex flex-col items-center justify-center mt-10 gap-10">
 
         <% if (errorMessages && errorMessages.length > 0) { %>
-            <div class="h-[4rem] bg-red-500 min-w-[40%] rounded-lg flex items-center justify-center text-white">
+            <div class="h-[4rem] bg-red-500 min-w-[40%] px-5 rounded-lg flex items-center justify-center text-white">
                 <% errorMessages.forEach(message => { %>
                     <p><i class="fa-solid fa-triangle-exclamation pr-2"></i> <%= message %></p>
                 <% }); %>
@@ -12,7 +12,7 @@
         <% } %>
         
         <% if (successMessages && successMessages.length > 0) { %>
-            <div class="h-[4rem] bg-green-500 min-w-[40%] rounded-lg flex items-center justify-center text-white">
+            <div class="h-[4rem] bg-green-500 min-w-[40%] px-5 rounded-lg flex items-center justify-center text-white">
                 <% successMessages.forEach(message => { %>
                     <p><i class="fa-solid fa-check pr-2"></i> <%= message %></p>
                 <% }); %>
