@@ -1,4 +1,26 @@
 <%- include('partials/nav') -%>
-<div class="flex items-start justify-center flex-grow w-full">
+<div class="flex items-start justify-center py-10 flex-grow w-full">
+    <div class="w-[70%]">
+        <div class="min-h-[35rem] py-5 flex flex-col items-center justify-center rounded-lg w-[40%] bg-[#111111] font-poppins gap-3">
+            <div class="flex flex-col items-start justify-center w-[85%] gap-1">
+                <p class="text-white text-xs">Title</p>
+                <input type="text" class="h-14 rounded-lg w-full bg-[#000000] border-0 text-white pl-2" name="" id="">
+            </div>
+            <div class="flex flex-col items-start justify-center w-[85%] gap-1">
+                <p class="text-white text-xs">Author</p>
+                <input type="text" class="h-14 rounded-lg w-full bg-[#000000] border-0 text-white pl-2" name="" id="">
+            </div>
+            <div class="flex flex-col items-start justify-center w-[85%] gap-1">
+                <p class="text-white text-xs">Cover URL</p>
+                <input type="text" class="h-14 rounded-lg w-full bg-[#000000] border-0 text-white pl-2" name="" id="">
+            </div>
+            <div class="flex flex-col items-start justify-center w-[85%] gap-1">
+                <p class="text-white text-xs">Description</p>
+                <textarea type="text" class="h-32 rounded-lg w-full bg-[#000000] border-0 text-white pl-2" name="" id=""></textarea>
+            </div>
+            <button class="h-10 px-10 rounded-lg font-poppins bg-white" type="submit">Submit</button>
+
+        </div>
+    </div>
 </div>
 <%- include('partials/foot') -%>
