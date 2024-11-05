@@ -25,7 +25,7 @@
 <script>
     document.querySelectorAll('.logout-form').forEach(form => {
         form.addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); 
 
             const sessionId = this.querySelector('input[name="sessionId"]').value;
 
@@ -40,9 +40,13 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    this.closest('.w-full').remove();
+                    this.closest('.w-full').remove();  
+
+                    if (data.redirect) {
+                        window.location.href = data.redirect;
+                    }
                 } else {
-                    alert('Error logging out');
+                    alert(data.message || 'Error logging out');
                 }
             })
             .catch(error => console.error('Error:', error));

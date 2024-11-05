@@ -23,8 +23,8 @@ router.post('/logout', isLoggedIn, async (req, res) => {
 
     const session = await Session.findById(sessionId);
     if (session) {
-        session.isActive = false;
-        await session.save();
+        session.isActive = false;  
+        await session.save(); 
     }
 
     // check for active sessions after logout
@@ -34,11 +34,12 @@ router.post('/logout', isLoggedIn, async (req, res) => {
         req.logout(err => {
             if (err) {
                 console.error('Logout error:', err);
+                return res.json({ success: false, message: 'Error logging out' });
             }
-            return res.json({ success: true });
+            return res.json({ success: true, redirect: '/login' }); 
         });
     } else {
-        return res.json({ success: true });
+        return res.json({ success: true, message: 'Session ended' });  
     }
 });
 export default router;
