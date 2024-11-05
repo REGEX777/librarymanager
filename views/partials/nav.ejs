@@ -9,36 +9,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/82eb69e53c.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Library</title>
 </head>
 <body class="bg-black">
-    <div class="w-full flex flex-col items-center justify-center pt-10 min-h-screen">
-        <div class="h-20 w-[80%] flex items-center justify-center bg-[#111111] rounded-lg">
-            <div class="w-[90%] h-10 flex items-center justify-between">
-                <p class="font-poppins text-lg text-white">Library</p>
-                <div class="flex flex-row items-center justify-center gap-5 font-poppins text-white">
+    <div class="w-full flex flex-col items-center justify-start pt-10 min-h-screen">
+        <div class="flex flex-col mid-small2:flex-row items-center justify-center w-full">
+            <div class="min-h-20 w-[95%] mid-small2:w-[80%] flex items-center justify-center bg-[#111111] rounded-lg relative">
+                <div class="w-[90%] min-h-10 flex flex-col mid-small2:flex-row items-center justify-between">
+                    <!-- "Library" Text -->
+                    <div class="flex flex-row items-center justify-between w-full mid-small2:w-auto">
+                        <a href="/" class="font-poppins text-lg text-white">Library</a>
+    
+                        <!-- Hamburger Icon for Small Screens -->
+                        <div class="flex mid-small2:hidden items-center justify-center">
+                            <p id="hamburger" class="text-2xl text-white cursor-pointer">
+                                <i class="fa-solid fa-bars"></i>
+                            </p>
+                        </div>
+                    </div>
+    
+                    <!-- Links for Larger Screens -->
+                    <div class="hidden mid-small2:flex flex-row items-center gap-5 font-poppins text-white">
+                        <% if (user) { %>
+                            <% if (user.admin) { %>
+                                <a href="/admin">Admin</a>
+                            <% } %>
+                            <a class="rounded-lg" href="/sessions">My Sessions</a>
+
+                            <a class="py-2 px-7 bg-white text-black rounded-lg" href="/logout">Logout</a>
+                        <% } else { %>
+                            <a href="/signup">Sign Up</a>
+                            <a class="py-2 px-7 bg-white text-black rounded-lg" href="/login">Login</a>
+                        <% } %>
+                    </div>
+                </div>
+    
+                <!-- Dropdown Menu for Smaller Screens -->
+                <div id="links" class="links hidden absolute top-full left-0 bg-[#222222] rounded-lg shadow-lg w-full mid-small2:w-auto flex-col items-start px-2 py-2 gap-5 font-poppins text-white z-30">
                     <% if (user) { %>
                         <% if (user.admin) { %>
                             <a href="/admin">Admin</a>
                         <% } %>
+                        <a class="rounded-lg" href="/sessions">My Sessions</a>
+
                         <a class="py-2 px-7 bg-white text-black rounded-lg" href="/logout">Logout</a>
-                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button" class="flex flex-row items-center justify-center gap-2 hover:bg-[#292929] transition-all duration-75 py-2 px-2 rounded-lg"><%= user.email.slice(0, 9) %>... <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                            </svg>
-                        </button>
                     <% } else { %>
-                        <a href="#">Sign Up</a>
+                        <a href="/signup">Sign Up</a>
                         <a class="py-2 px-7 bg-white text-black rounded-lg" href="/login">Login</a>
                     <% } %>
-
-                        
-                    <div id="dropdown" class="z-10 hidden bg-[#111111] rounded-lg shadow w-44 border-2 border-[#242424]">
-                        <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdownDefaultButton">
-                        <li>
-                            <a href="/sessions" class="block px-4 py-2 hover:bg-gray-600 dark:hover:text-white">My Sessions</a>
-                        </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>

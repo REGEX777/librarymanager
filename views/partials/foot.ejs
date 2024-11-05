@@ -1,6 +1,6 @@
 </div>
 <div class="flex items-center justify-center w-full">
-    <div class="h-[3rem] rounded-lg w-[70%] bg-[#111111] flex items-center justify-center">
+    <div class="h-[3rem] rounded-lg w-[95%] mid-small2:w-[80%] bg-[#111111] flex items-center justify-center">
         <div class="w-[90%] text-white text-xs font-poppins">
             <p>Made by regex</p>
         </div>
@@ -10,4 +10,16 @@
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
 </body>
+<script>
+    let hamburger = document.getElementById('hamburger');
+    let link = document.getElementById('links');
+    let button = document.getElementById('button');
+
+    hamburger.addEventListener('click', () => {
+        link.classList.toggle('hidden');
+        link.classList.toggle('flex');
+        button.classList.toggle('hidden');
+        button.classList.toggle('block');
+    });
+</script>
 </html>

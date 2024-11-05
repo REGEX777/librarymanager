@@ -1,0 +1,61 @@
+<%- include('partials/nav') -%>
+<div class="flex items-center justify-start flex-col flex-grow w-full py-2">
+    <% if (errorMessages && errorMessages.length > 0) { %>
+        <div class="h-[4rem] bg-red-500 min-w-[40%] rounded-lg flex items-center justify-center text-white">
+            <% errorMessages.forEach(message => { %>
+                <p><i class="fa-solid fa-triangle-exclamation pr-2"></i> <%= message %></p>
+            <% }); %>
+        </div>
+    <% } %>
+    
+    <% if (successMessages && successMessages.length > 0) { %>
+        <div class="h-[4rem] bg-green-500 min-w-[40%] rounded-lg flex items-center justify-center text-white">
+            <% successMessages.forEach(message => { %>
+                <p><i class="fa-solid fa-check pr-2"></i> <%= message %></p>
+            <% }); %>
+        </div>
+    <% } %>
+    <div class="min-h-[20rem] w-[80%] flex flex-col 850px:flex-row py-5 items-center justify-center font-poppins bg-[#111111] rounded-lg mt-10 gap-10 px-10">
+        <img src="<%= book.cover %>" alt="" class="w-[10rem]">
+        <div class="flex flex-col items-start justify-center text-white w-full gap-10">
+            <div class="flex flex-col 530px:flex-row items-start gap-5 530px:items-center justify-between w-full">
+                <div class="flex flex-col items-start justify-center">
+                    <p class="text-3xl"><%= book.title %></p>
+                    <p class="text-xs"><%= book.author %></p>
+                </div>
+                <div class="flex flex-row items-center justify-center gap-2">
+                    <% if (user) { %>
+                        <% if (user.id === book.checkedOutBy) { %>
+                            <form action="/book/<%= book._id %>/return" method="post">
+                                <input type="hidden" name="userid" value="<%= user.id %>">
+                                <button class="py-2 px-5 bg-[#339A33] rounded-lg" type="submit">Return</button>
+                            </form>
+                        <% } %>
+                        
+                        <% if (user.admin) { %>
+                            <form action="/book/<%= book._id %>/delete" method="post">
+                                <button class="py-2 px-5 bg-[#FF1111] rounded-lg" type="submit">Delete</button>
+                            </form>
+                        <% } %>
+                    <% } %>
+                
+                    <% if (!book.checkedOut) { %>
+                        <form action="/book/<%= book._id %>/checkout" method="post">
+                            <input type="hidden" name="userid" value="<%= user ? user.id : '' %>">
+                            <button class="py-2 px-5 bg-[#D9D9D9] rounded-lg text-black" type="submit">Check Out</button>
+                        </form>
+                    <% } %>
+                
+                    <% if (book.checkedOut) { %>
+                        <% if (!user || user.id !== book.checkedOutBy) { %>
+                            <p>Checked out by: <%= checkedOutByUser ? checkedOutByUser.email : 'Unknown User' %></p>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+            <p class="text-sm text-[#817E7E] text-start"><%= book.description %></p>
+        </div>
+    </div>
+
+</div>
+<%- include('partials/foot') -%>

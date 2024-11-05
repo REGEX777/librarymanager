@@ -96,6 +96,7 @@ passport.use(
 // middleware for flash messages
 app.use((req, res, next) => {
     res.locals.errorMessages = req.flash('error');
+    res.locals.successMessages = req.flash('success');
     next();
 });
 
@@ -120,6 +121,7 @@ import loginRoute from './routes/login.js';
 import logoutRoute from './routes/logout.js';
 import adminRoute from './routes/admin.js';
 import sessionRoute from './routes/session.js';
+import bookRoute from './routes/book.js'
 
 // Routes
 app.use('/', indexRoute);
@@ -128,6 +130,7 @@ app.use('/login', loginRoute);
 app.use('/logout', logoutRoute);
 app.use('/admin', adminRoute);
 app.use('/sessions', sessionRoute)
+app.use('/book', bookRoute)
 
 // server
 app.listen(port, () => {
