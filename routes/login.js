@@ -1,12 +1,13 @@
 import express from 'express';
 import passport from 'passport';
 import useragent from 'useragent';
+import crypto from 'crypto';
 
 const router = express.Router();
 
 // model
 import Session from '../models/Session.js';
-
+import User from '../models/User.js'
 // middleware
 import { isLoggedOut } from '../middleware/isLoggedOut.js';
 import { validateEmail } from '../middleware/emailValidator.js';
@@ -27,8 +28,7 @@ router.post('/', validateEmail, passport.authenticate('local', {
         const existingSession = await Session.findOne({
             userId: req.user._id,
             ipAddress,
-            deviceInfo,
-            isActive: true
+            deviceInfo
         });
 
         if (!existingSession) {
@@ -36,8 +36,7 @@ router.post('/', validateEmail, passport.authenticate('local', {
             const session = new Session({
                 userId: req.user._id,
                 ipAddress,
-                deviceInfo,
-                isActive: true,
+                deviceInfo
             });
             await session.save();
         }
@@ -48,5 +47,4 @@ router.post('/', validateEmail, passport.authenticate('local', {
         res.status(500).send('An error occurred while creating the session.');
     }
 });
-
 export default router;

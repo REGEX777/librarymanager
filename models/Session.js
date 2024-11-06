@@ -18,11 +18,7 @@ const sessionSchema = new mongoose.Schema({
       loggedInAt: {
         type: Date,
         default: Date.now,
-      },
-      isActive: {
-        type: Boolean,
-        default: true,
-      },
+      }
 })
 
 

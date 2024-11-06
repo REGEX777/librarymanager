@@ -9,11 +9,10 @@ import { isAdmin } from '../middleware/isAdmin.js';
 // model
 import Book from '../models/Book.js'
 import { body } from 'express-validator';
-
 router.get('/', isLoggedIn, isAdmin, (req, res)=>{
     res.render('admin')
 })
-
+ 
 router.post('/book/new', async (req, res) => {
     try {
         const { title, author, coverurl, description } = req.body;

@@ -22,6 +22,15 @@
                 <div class="flex flex-col items-start justify-center">
                     <p class="text-3xl"><%= book.title %></p>
                     <p class="text-xs"><%= book.author %></p>
+                    <% if (!book.checkedOut) { %>
+                        <div class="px-3 bg-green-500 rounded-full text-xs">
+                            <p>Available</p>
+                        </div>
+                    <% } else { %>
+                        <div class="px-3 bg-red-500 rounded-full text-xs">
+                            <p>Taken</p>
+                        </div>
+                    <% } %>
                 </div>
                 <div class="flex flex-row items-center justify-center gap-2">
                     <% if (user) { %>
