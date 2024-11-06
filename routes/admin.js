@@ -9,8 +9,11 @@ import { isAdmin } from '../middleware/isAdmin.js';
 // model
 import Book from '../models/Book.js'
 import { body } from 'express-validator';
-router.get('/', isLoggedIn, isAdmin, (req, res)=>{
-    res.render('admin')
+import { checkSession } from '../middleware/checksession.js';
+
+router.get('/', checkSession, isLoggedIn, isAdmin, (req, res)=>{
+    console.log(req.sessionData)
+    res.render('admin',{sessionData:req.sessionData, csrfToken: req.csrfToken()})
 })
  
 router.post('/book/new', async (req, res) => {

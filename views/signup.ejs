@@ -19,6 +19,7 @@
         <p class="text-3xl text-white">Sign Up</p>
 
         <form action="/signup" method="post" class="flex flex-col items-center w-full justify-center gap-5">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="flex flex-col text-white items-start justify-center w-[90%] gap-1">
                 <p class="text-xs">E-mail</p>
                 <input required name="email" type="email" class="h-12 w-[100%] rounded-lg bg-black text-white pl-2"> 

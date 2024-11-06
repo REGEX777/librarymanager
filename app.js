@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import flash from 'express-flash';
 import session from 'express-session';
 import bcrypt from 'bcrypt';
+import csrf from 'csurf';
 
 // model import
 import User from './models/User.js';
@@ -43,7 +44,15 @@ app.use(session({
 
 // express flash
 app.use(flash());
-
+const csrfProtection = csrf({ cookie: true });
+app.use(csrfProtection);
+app.use((err, req, res, next) => {
+    if (err.code === 'EBADCSRFTOKEN') {
+        res.status(403).send('Invalid CSRF token');
+    } else {
+        next(err);
+    }
+});
 // passport.js configuration
 app.use(passport.initialize());
 app.use(passport.session());
@@ -100,12 +109,12 @@ app.use((req, res, next) => {
     next();
 });
 
-// passing user everywhere
+
 app.use((req, res, next) => {
-    res.locals.user = req.user || null;
+    res.locals.user = req.user || null;  
+    res.locals.sessionData = req.sessionData || null; 
     next();
 });
-
 
 // p]ort
 const port = 3000;

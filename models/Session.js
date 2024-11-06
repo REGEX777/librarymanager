@@ -15,6 +15,7 @@ const sessionSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      key: String,
       loggedInAt: {
         type: Date,
         default: Date.now,

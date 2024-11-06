@@ -36,6 +36,7 @@
                     <% if (user) { %>
                         <% if (user.id === book.checkedOutBy) { %>
                             <form action="/book/<%= book._id %>/return" method="post">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <input type="hidden" name="userid" value="<%= user.id %>">
                                 <button class="py-2 px-5 bg-[#339A33] rounded-lg" type="submit">Return</button>
                             </form>
@@ -43,6 +44,8 @@
                         
                         <% if (user.admin) { %>
                             <form action="/book/<%= book._id %>/delete" method="post">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
                                 <button class="py-2 px-5 bg-[#FF1111] rounded-lg" type="submit">Delete</button>
                             </form>
                         <% } %>
@@ -50,6 +53,8 @@
                 
                     <% if (!book.checkedOut) { %>
                         <form action="/book/<%= book._id %>/checkout" method="post">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
                             <input type="hidden" name="userid" value="<%= user ? user.id : '' %>">
                             <button class="py-2 px-5 bg-[#D9D9D9] rounded-lg text-black" type="submit">Check Out</button>
                         </form>

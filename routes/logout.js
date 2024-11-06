@@ -3,15 +3,14 @@ import Session from '../models/Session.js'; // Import the Session model
 
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
-        console.log(req.ip)
-        console.log(req.user._id)
-        console.log(req.deviceInfo)
+        const sessionKey = req.body.sessionKey 
+        console.log(sessionKey)
         await Session.deleteOne({
             userId: req.user._id,  
             ipAddress: req.ip,      
-            deviceInfo: req.deviceInfo 
+            key: sessionKey
         });
 
         req.logout(function (err) {
@@ -19,7 +18,6 @@ router.get('/', async (req, res, next) => {
                 return next(err);
             }
 
-            // Clear the session cookie set by Passport
             res.clearCookie('connect.sid'); 
 
             res.redirect('/login');

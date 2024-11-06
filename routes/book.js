@@ -9,8 +9,10 @@ import User from '../models/User.js';
 import { validateId } from '../middleware/idValidator.js';
 import { isAdmin } from '../middleware/isAdmin.js';
 import { isLoggedIn } from '../middleware/isLoggedIn.js';
+import { checkSession } from '../middleware/checksession.js';
 
-router.get('/:id', validateId, async (req, res) => {
+
+router.get('/:id', checkSession, validateId, async (req, res) => {
     try {
         const book = await Book.findOne({ _id: req.params.id });
         
@@ -19,7 +21,7 @@ router.get('/:id', validateId, async (req, res) => {
             checkedOutByUser = await User.findById(book.checkedOutBy).select('email');
         }
 
-        res.render('book', { book: book, checkedOutByUser: checkedOutByUser });
+        res.render('book', { book: book, checkedOutByUser: checkedOutByUser, sessionData: req.sessionData,  csrfToken: req.csrfToken() });
     } catch (err) {
         console.error(err);
     }
