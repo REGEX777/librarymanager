@@ -11,6 +11,7 @@
                     </div>
                     <div>
                         <form class="logout-form" action="/sessions/logout" method="POST">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                             <input type="hidden" name="sessionKey" value="<%= session.key %>">
                             <button class="py-2 px-2 bg-red-500 rounded-lg" type="submit">Log out</button>
                         </form>

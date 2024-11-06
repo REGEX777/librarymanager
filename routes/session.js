@@ -12,7 +12,7 @@ import { checkSession } from '../middleware/checksession.js';
 router.get('/', checkSession, isLoggedIn, async (req, res) => {
     const sessions = await Session.find({ userId: req.user._id });
 
-    res.render('sessions', { sessions, sessionData: req.sessionData });
+    res.render('sessions', { sessions, sessionData: req.sessionData,  csrfToken: req.csrfToken() });
 });
 
 router.post('/logout',  async (req, res, next) => {
